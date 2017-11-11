@@ -14,38 +14,38 @@ class mysqlOrm {
     return this;
   }
 
-  find(q) {
-    this.opeart = 'select * from ' + this.tablename;
+  where(q = ' ') {
     if (typeof  q === 'object') {
-      this.opeart = this.opeart + ' where ';
+      this._where = ' where ';
       for (let ob in q) {
-        this.opeart = this.opeart + " and " + ob + "='" + q[ob] + "'";
+        this._where = this._where + ' and ' + ob + "='" + q[ob] + "'";
       }
+    } else {
+      this._where = q;
     }
     return this;
   }
 
   skip(s) {
-    this.opeart = this.opeart + " limit " + s;
+    this._skip = ' limit ' + s;
     this.isLimt = true;
     return this;
   }
 
   limit(l) {
     if (this.isLimt) {
-      this.opeart = this.opeart + "," + l;
+      this._skip = this._skip + ',' + l;
     } else {
-      this.opeart = this.opeart + "limit " + l;
+      this._skip = this._skip + ' limit ' + l;
     }
     return this;
   }
 
   then(callback) {
-    let pool = this.pool;
-    let opeart = this.opeart;
+    let pool = this.pool;//实例
+    let sql = 'select * from ' + this.tablename + this._where + this._skip;//sql语句
     return new Promise(function (res, rej) {
-      console.log(opeart);
-      pool.query(opeart, function (err, data) {
+      pool.query(sql, function (err, data) {
         if (err) {
           rej(err);
         } else {
@@ -55,20 +55,7 @@ class mysqlOrm {
     }).then(callback);
   }
 }
-
-
-const orm = new mysqlOrm({
-  host: 'localhost',
-  user: 'root',
-  password: 'black',
-  database: 'sys'
-});
-
-orm.table('new_table').find().skip(0).limit(12).then((res) => {
-  console.log(res);
-}).catch(err => {
-  console.error(err)
-});
+module.exports = mysqlOrm;
 
 
 

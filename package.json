@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/740552662/Practice-project/issues"
   },
-  "homepage": "https://github.com/740552662/Practice-project#readme"
+  "homepage": "https://github.com/740552662/Practice-project#readme",
+  "dependencies": {
+    "mysql": "^2.15.0"
+  }
 }
