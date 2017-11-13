@@ -1,6 +1,6 @@
 # 练习node.js
 
-##1.实现一个 mysql orm 模块
+## 1.实现一个 mysql orm 模块
 
 ```
 const mysqlOrm = require('./orm');
@@ -26,7 +26,7 @@ let getNew_table = async () => {
 //查询
 getNew_table();
 ```
-##2.实现一个 异步队列 模块
+## 2.实现一个 异步队列 模块
 ```
 const queue = require('./queue').queue;
 const q_event = require('./queue').q_event;
@@ -71,4 +71,4 @@ q.add(f1).add(f2).run();//添加2个函数，并运行
 4015 [ 2 ]
 
 ```
-##3.实现一个 redis session 中间件模块
+## 3.实现一个 redis session 中间件模块
